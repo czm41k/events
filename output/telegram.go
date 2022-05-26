@@ -9,7 +9,7 @@ import (
 	"github.com/devopsext/events/common"
 	"github.com/devopsext/events/render"
 	sreCommon "github.com/devopsext/sre/common"
-	vendors "github.com/devopsext/tools/vendors"
+	"github.com/devopsext/tools/vendors"
 	"github.com/devopsext/utils"
 	"github.com/prometheus/alertmanager/template"
 	"golang.org/x/time/rate"
@@ -82,6 +82,7 @@ func (t *TelegramOutput) sendMessage(spanCtx sreCommon.TracerSpanContext, IDToke
 
 	if err != nil {
 		t.logger.SpanError(span, err)
+		t.logger.SpanError(span, message)
 		return nil, err
 	}
 

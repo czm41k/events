@@ -34,6 +34,7 @@ require (
 )
 
 require (
+	github.com/buger/jsonparser v1.1.1
 	github.com/cloudevents/sdk-go/v2 v2.3.1
 	github.com/embano1/waitgroup v0.0.0-20201120223302-1d5df9b49112
 	github.com/google/uuid v1.2.0
@@ -152,5 +153,6 @@ require (
 replace gopkg.in/DataDog/dd-trace-go.v1 => github.com/devopsext/dd-trace-go v1.31.2
 
 //replace google.golang.org/grpc => google.golang.org/grpc v1.29.1
-//replace github.com/devopsext/events/input => ./input
+replace github.com/devopsext/events/input => ./input
+replace github.com/devopsext/events/processor => ./processor
 //replace github.com/devopsext/tools => ../tools/

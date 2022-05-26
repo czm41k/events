@@ -1,23 +1,48 @@
+{{- define "vcenter"}}
+  {{- if .data.subject}}
+    {{- if (.data.subject | regexMatch "com.vmware.vc.vm.VmHotMigratingWithEncryptionEvent") }}
+      {{- $destDatastore  := "x"}}
+      {{- $destDatacenter := "x"}}
+      {{- $destHost       := "x"}}
+      {{- range .data.data.Arguments }}
+        {{- if (.Key | regexMatch "destHost")       }} {{- $destHost =       .Value}} {{- end}}
+        {{- if (.Key | regexMatch "destDatacenter") }} {{- $destDatacenter = .Value}} {{- end}}
+        {{- if (.Key | regexMatch "destDatastore")  }} {{- $destDatastore =  .Value}} {{- end}}
+      {{- end }}
+      {{- printf "%s(%s)\n" .data.data.Vm.Name .data.data.Datacenter.Name }}
+      {{- printf "%s(%s/%s) Hot migrating -> %s(%s/%s)\n" .data.data.Host.Name .data.data.Datacenter.Datacenter.Value .data.data.Ds.Name $destHost $destDatacenter $destDatastore }}
+    {{- end}}
+    {{- if (.data.subject | regexMatch "VmFailedMigrateEvent") }}
+      {{- printf "%s(%s)\n" .data.data.Vm.Name .data.data.Datacenter.Name }}
+      {{- printf "%s(%s)\n: Cannot migrate(%s)" .data.data.Host.Name .data.data.Datacenter.Datacenter.Value .data.data.Ds.Name .data.data.Reason.LocalizedMessage}}
+    {{- end}}
+    {{- if (.data.subject | regexMatch "VmEmigratingEvent") }}
+      {{- printf "%s(%s)\n" .data.data.Vm.Name .data.data.Datacenter.Name }}
+      {{- printf "%s(%s): Migrating off host\n" .data.data.Host.Name .data.data.Datacenter.Datacenter.Value }}
+    {{- end}}
+    {{- if (.data.subject | regexMatch "VmBeingHotMigratedEvent") }}
+      {{- printf "%s(%s)\n" .data.data.Vm.Name .data.data.Datacenter.Name }}
+      {{- printf "%s(%s/%s) -> %s(%s/%s)\n" .data.data.Host.Name .data.data.Datacenter.Datacenter.Value .data.data.DS.Name .data.data.DestHost.Name .data.data.DestDatacenter.Datacenter.Value .data.data.DestDatastore.Name }}
+    {{- end}}
+    {{- if (.data.subject | regexMatch "DrsVmMigratedEvent") }}
+      {{ printf "%s(%s)\n" .data.data.Vm.Name .data.data.SourceDatacenter.Name }}
+      {{- printf "%s(%s/%s) -> %s(%s/%s)\n" .data.data.SourceHost.Name .data.data.SourceDatacenter.Datacenter.Value .data.data.SourceDatastore.Name .data.data.Host.Name .data.data.Datacenter.Datacenter.Value .data.data.Ds.Name }}
+    {{- end}}
+  {{- end}}
+{{- end}}
 {{- define "text"}}
   {{- if eq .type "K8sEvent"}}
     {{- if not (.data.user.name | regexMatch "(system:serviceaccount:*|system:*)")}}
       {{- printf "%s\n%s / %s" (upper .data.operation) .data.kind .data.location}}
     {{- end}}
   {{- end}}
-  {{- if eq .type "AlertmanagerEvent"}}{{- printf "%s\n%s" (upper .data.status) .data.labels.alertname}}{{- end}}
-  {{- if eq .type "GitlabEvent"}}
-    {{- $match := getEnv "EVENTS_GITLAB_RUNNERS"}}{{$ok := false}}
-    {{- if .data.builds}}
-      {{- range .data.builds}}
-        {{- if and (.runner.description | regexMatch $match) (not (empty .finished_at))}}{{$ok = true}}{{end}}
-      {{- end}}
-    {{- else}}
-      {{- if and (.data.runner.description | regexMatch $match) (not (empty .data.build_duration))}}{{$ok = true}}{{end}}
-    {{- end}}
-    {{- if $ok}}
-      {{- if .data.project}}{{- printf "%s\n<a href=\"%s\">%s / %s@%s</a>" (upper .data.object_kind) .data.commit.url .data.project.namespace .data.project.name .data.object_attributes.ref}}
-      {{- else}}{{- printf "%s\n<a href=\"%s/-/commit/%s\">%s@%s</a>" (upper .data.object_kind) .data.repository.homepage .data.commit.sha .data.project_name .data.ref}}{{end}}
-    {{- end}}
-  {{- end}}
 {{- end}}
-{{- define "grafana-message"}}{{- if .data}}{{template "text" .}}{{end}}{{- end}}
+{{- define "grafana-message"}}
+  {{- if .data}}
+    {{- if eq .type "vcenterEvent"}}
+      {{template "vcenter" .}}
+    {{- else }}
+      {{template "text" .}}
+    {{- end }}
+  {{end}}
+{{- end}}

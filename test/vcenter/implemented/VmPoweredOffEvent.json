@@ -1,0 +1,50 @@
+{
+  "data": {
+    "Key": 61896452,
+    "ChainId": 61896445,
+    "CreatedTime": "2022-05-25T08:46:44.085999Z",
+    "UserName": "FullUsername",
+    "Datacenter": {
+      "Name": "OrigClusterName",
+      "Datacenter": {
+        "Type": "Datacenter",
+        "Value": "OrigDatacenterName"
+      }
+    },
+    "ComputeResource": {
+      "Name": "OrigLocation",
+      "ComputeResource": {
+        "Type": "ClusterComputeResource",
+        "Value": "OrigDomainInt"
+      }
+    },
+    "Host": {
+      "Name": "OrigESXiHostName",
+      "Host": {
+        "Type": "HostSystem",
+        "Value": "OrigESXiHostInt"
+      }
+    },
+    "Vm": {
+      "Name": "VmName",
+      "Vm": {
+        "Type": "VirtualMachine",
+        "Value": "vmInt"
+      }
+    },
+    "Ds": null,
+    "Net": null,
+    "Dvs": null,
+    "FullFormattedMessage": "vmName on  OrigESXiHostName in ClusterName is powered off",
+    "ChangeTag": "",
+    "Template": false
+  },
+  "datacontenttype": "application/json",
+  "id": "ba0905c2-8fb9-4ec3-95b8-98015178a29e",
+  "source": "https://FQDN/sdk",
+  "specversion": "1.0",
+  "subject": "VmPoweredOffEvent",
+  "time": "2022-05-25T08:46:44.085999Z",
+  "type": "com.vmware.event.router/event",
+  "vsphereapiversion": "7.0.3.0"
+}

@@ -1,0 +1,64 @@
+{
+  "data": {
+    "Key": 61835550,
+    "ChainId": 61835550,
+    "CreatedTime": "2022-05-24T17:24:48.963999Z",
+    "UserName": "",
+    "Datacenter": {
+      "Name": "clusterName",
+      "Datacenter": {
+        "Type": "Datacenter",
+        "Value": "dataCenterName"
+      }
+    },
+    "ComputeResource": {
+      "Name": "Location",
+      "ComputeResource": {
+        "Type": "ClusterComputeResource",
+        "Value": "domainName"
+      }
+    },
+    "Host": {
+      "Name": "esxiName",
+      "Host": {
+        "Type": "HostSystem",
+        "Value": "hostInt"
+      }
+    },
+    "Vm": null,
+    "Ds": null,
+    "Net": null,
+    "Dvs": null,
+    "FullFormattedMessage": "Alarm 'Host error' on esxiName triggered an action",
+    "ChangeTag": "",
+    "Alarm": {
+      "Name": "Host error",
+      "Alarm": {
+        "Type": "Alarm",
+        "Value": "alarm-22"
+      }
+    },
+    "Source": {
+      "Name": "Datacenters",
+      "Entity": {
+        "Type": "Folder",
+        "Value": "groupDir"
+      }
+    },
+    "Entity": {
+      "Name": "esxiHostname",
+      "Entity": {
+        "Type": "HostSystem",
+        "Value": "hostInt"
+      }
+    }
+  },
+  "datacontenttype": "application/json",
+  "id": "b87f340e-75d9-413e-ad9f-4e8977001439",
+  "source": "https://FQDN/sdk",
+  "specversion": "1.0",
+  "subject": "AlarmActionTriggeredEvent",
+  "time": "2022-05-24T17:24:48.963999Z",
+  "type": "com.vmware.event.router/event",
+  "vsphereapiversion": "7.0.3.0"
+}

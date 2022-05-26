@@ -18,7 +18,7 @@ import (
 	sreCommon "github.com/devopsext/sre/common"
 	sreProvider "github.com/devopsext/sre/provider"
 	"github.com/devopsext/tools/vendors"
-	utils "github.com/devopsext/utils"
+	"github.com/devopsext/utils"
 	"github.com/spf13/cobra"
 )
 
@@ -133,7 +133,7 @@ var telegramOutputOptions = output.TelegramOutputOptions{
 	BotSelector:     envGet("TELEGRAM_OUT_BOT_SELECTOR", "").(string),
 	AlertExpression: envGet("TELEGRAM_OUT_ALERT_EXPRESSION", "g0.expr").(string),
 	Forward:         envGet("TELEGRAM_OUT_FORWARD", "").(string),
-	RateLimit:       envGet("TELEGRAM_RATELIMIT", 5).(int),
+	RateLimit:       envGet("TELEGRAM_RATELIMIT", 15).(int),
 }
 
 var slackOutputOptions = output.SlackOutputOptions{

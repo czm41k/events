@@ -1,0 +1,77 @@
+{
+  "data": {
+    "Key": 61835502,
+    "ChainId": 61835494,
+    "CreatedTime": "2022-05-24T17:24:18.364Z",
+    "UserName": "",
+    "Datacenter": {
+      "Name": "DestClusterName",
+      "Datacenter": {
+        "Type": "Datacenter",
+        "Value": "OrigDatacenterName"
+      }
+    },
+    "ComputeResource": {
+      "Name": "DestLocation",
+      "ComputeResource": {
+        "Type": "ClusterComputeResource",
+        "Value": "DestDomainInt"
+      }
+    },
+    "Host": {
+      "Name": "DestESXiHostName",
+      "Host": {
+        "Type": "HostSystem",
+        "Value": "DestESXiHostInt"
+      }
+    },
+    "Vm": {
+      "Name": "VmName",
+      "Vm": {
+        "Type": "VirtualMachine",
+        "Value": "vmInt"
+      }
+    },
+    "Ds": {
+      "Name": "DestDatastoreName",
+      "Datastore": {
+        "Type": "Datastore",
+        "Value": "DatastoreInt"
+      }
+    },
+    "Net": null,
+    "Dvs": null,
+    "FullFormattedMessage": "DRS migrated VmName from OrigESXiHostName to DestESXiHostName in cluster DestLocation in OrigClusterName",
+    "ChangeTag": "",
+    "Template": false,
+    "SourceHost": {
+      "Name": "OrigESXiHostName",
+      "Host": {
+        "Type": "HostSystem",
+        "Value": "OrigESXiHostInt"
+      }
+    },
+    "SourceDatacenter": {
+      "Name": "OrigClusterName",
+      "Datacenter": {
+        "Type": "Datacenter",
+        "Value": "OrigDatacenterName"
+      }
+    },
+    "SourceDatastore": {
+      "Name": "OrigDatastoreName",
+      "Datastore": {
+        "Type": "Datastore",
+        "Value": "OrigDatastoreInt"
+      }
+    }
+  },
+  "datacontenttype": "application/json",
+  "id": "46fbc82b-cb18-434e-be60-f7721d2bc0b3",
+  "source": "https://vcenter.exness.local/sdk",
+  "specversion": "1.0",
+  "subject": "DrsVmMigratedEvent",
+  "time": "2022-05-24T17:24:18.364Z",
+  "type": "com.vmware.event.router/event",
+  "vsphereapiversion": "7.0.3.0"
+}

@@ -1,0 +1,57 @@
+{
+  "data": {
+    "Key": 61835551,
+    "ChainId": 61835551,
+    "CreatedTime": "2022-05-24T17:24:48.963999Z",
+    "UserName": "",
+    "Datacenter": {
+      "Name": "OrigClusterName",
+      "Datacenter": {
+        "Type": "Datacenter",
+        "Value": "OrigDatacenterName"
+      }
+    },
+    "ComputeResource": {
+      "Name": "OrigLocation",
+      "ComputeResource": {
+        "Type": "ClusterComputeResource",
+        "Value": "OrigDomainInt"
+      }
+    },
+    "Host": {
+      "Name": "OrigESXiHostName",
+      "Host": {
+        "Type": "HostSystem",
+        "Value": "OrigESXiHostInt"
+      }
+    },
+    "Vm": null,
+    "Ds": null,
+    "Net": null,
+    "Dvs": null,
+    "FullFormattedMessage": "Alarm 'Host error': an SNMP trap for entity OrigESXiHostName was sent",
+    "ChangeTag": "",
+    "Alarm": {
+      "Name": "Host error",
+      "Alarm": {
+        "Type": "Alarm",
+        "Value": "alarm-22"
+      }
+    },
+    "Entity": {
+      "Name": "OrigESXiHostName",
+      "Entity": {
+        "Type": "HostSystem",
+        "Value": "OrigESXiHostInt"
+      }
+    }
+  },
+  "datacontenttype": "application/json",
+  "id": "5882a236-1533-4e1c-9dec-fa373ead55ac",
+  "source": "https://FQDN/sdk",
+  "specversion": "1.0",
+  "subject": "AlarmSnmpCompletedEvent",
+  "time": "2022-05-24T17:24:48.963999Z",
+  "type": "com.vmware.event.router/event",
+  "vsphereapiversion": "7.0.3.0"
+}

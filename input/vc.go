@@ -453,7 +453,10 @@ func (vc *VCInput) Start(wg *sync.WaitGroup, _ *common.Outputs) {
 
 		vc.wg.Add(1)
 		defer vc.wg.Done()
-		vc.pollEvents(ehc)
+		err = vc.pollEvents(ehc)
+		if err != nil {
+			vc.logger.Error(err, "errors with event history collector polling")
+		}
 	}(wg)
 }
 
@@ -577,10 +580,13 @@ func (vc *VCInput) processEvents(vcBaseEvents []vctypes.BaseEvent) (*vcLastEvent
 
 		p := vc.processors.Find(curevent.Type)
 		if p == nil {
-			vc.logger.Debug("PubSub processor is not found for %s", curevent.Type)
+			vc.logger.Debug("VC processor is not found for %s", curevent.Type)
 			return nil, errInvalidProcessor
 		}
-		p.HandleEvent(curevent)
+		err = p.HandleEvent(curevent)
+		if err != nil {
+			vc.logger.Debug("some problems with %v", err)
+		}
 
 		last = &vcLastEvent{
 			baseEvent: e,

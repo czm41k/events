@@ -6,7 +6,7 @@ import (
 	"os"
 	"sync"
 
-	pubsub "cloud.google.com/go/pubsub"
+	"cloud.google.com/go/pubsub"
 	"github.com/devopsext/events/common"
 	sreCommon "github.com/devopsext/sre/common"
 	"github.com/devopsext/utils"

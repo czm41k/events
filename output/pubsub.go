@@ -6,7 +6,7 @@ import (
 	"strings"
 	"sync"
 
-	pubsub "cloud.google.com/go/pubsub"
+	"cloud.google.com/go/pubsub"
 	"github.com/devopsext/events/common"
 	"github.com/devopsext/events/render"
 	sreCommon "github.com/devopsext/sre/common"
