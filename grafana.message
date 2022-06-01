@@ -1,33 +1,7 @@
 {{- define "vcenter"}}
-  {{- if .data.subject}}
-    {{- if (.data.subject | regexMatch "com.vmware.vc.vm.VmHotMigratingWithEncryptionEvent") }}
-      {{- $destDatastore  := "x"}}
-      {{- $destDatacenter := "x"}}
-      {{- $destHost       := "x"}}
-      {{- range .data.data.Arguments }}
-        {{- if (.Key | regexMatch "destHost")       }} {{- $destHost =       .Value}} {{- end}}
-        {{- if (.Key | regexMatch "destDatacenter") }} {{- $destDatacenter = .Value}} {{- end}}
-        {{- if (.Key | regexMatch "destDatastore")  }} {{- $destDatastore =  .Value}} {{- end}}
-      {{- end }}
-      {{- printf "%s(%s)\n" .data.data.Vm.Name .data.data.Datacenter.Name }}
-      {{- printf "%s(%s/%s) Hot migrating -> %s(%s/%s)\n" .data.data.Host.Name .data.data.Datacenter.Datacenter.Value .data.data.Ds.Name $destHost $destDatacenter $destDatastore }}
-    {{- end}}
-    {{- if (.data.subject | regexMatch "VmFailedMigrateEvent") }}
-      {{- printf "%s(%s)\n" .data.data.Vm.Name .data.data.Datacenter.Name }}
-      {{- printf "%s(%s)\n: Cannot migrate(%s)" .data.data.Host.Name .data.data.Datacenter.Datacenter.Value .data.data.Ds.Name .data.data.Reason.LocalizedMessage}}
-    {{- end}}
-    {{- if (.data.subject | regexMatch "VmEmigratingEvent") }}
-      {{- printf "%s(%s)\n" .data.data.Vm.Name .data.data.Datacenter.Name }}
-      {{- printf "%s(%s): Migrating off host\n" .data.data.Host.Name .data.data.Datacenter.Datacenter.Value }}
-    {{- end}}
-    {{- if (.data.subject | regexMatch "VmBeingHotMigratedEvent") }}
-      {{- printf "%s(%s)\n" .data.data.Vm.Name .data.data.Datacenter.Name }}
-      {{- printf "%s(%s/%s) -> %s(%s/%s)\n" .data.data.Host.Name .data.data.Datacenter.Datacenter.Value .data.data.DS.Name .data.data.DestHost.Name .data.data.DestDatacenter.Datacenter.Value .data.data.DestDatastore.Name }}
-    {{- end}}
-    {{- if (.data.subject | regexMatch "DrsVmMigratedEvent") }}
-      {{ printf "%s(%s)\n" .data.data.Vm.Name .data.data.SourceDatacenter.Name }}
-      {{- printf "%s(%s/%s) -> %s(%s/%s)\n" .data.data.SourceHost.Name .data.data.SourceDatacenter.Datacenter.Value .data.data.SourceDatastore.Name .data.data.Host.Name .data.data.Datacenter.Datacenter.Value .data.data.Ds.Name }}
-    {{- end}}
+  {{- if .data.Subject}}
+    {{- printf "%s\n" .data.VmName }}
+    {{- printf "%s -> %s\n" .data.OrigESXiHostName  .data.DestESXiHostName  }}
   {{- end}}
 {{- end}}
 {{- define "text"}}

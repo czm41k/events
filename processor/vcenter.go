@@ -1,7 +1,6 @@
 package processor
 
 import (
-	"encoding/json"
 	"errors"
 	"fmt"
 	"github.com/buger/jsonparser"
@@ -115,6 +114,21 @@ func (vce *vcenterEvent) ParseVmPoweredOffEvent(jsonByte []byte) error {
 }
 
 func (vce *vcenterEvent) parse(jsonString string) error {
+	vce.CreatedTime = " "
+	vce.FullUsername = " "
+	vce.Message = " "
+	vce.VmName = " "
+	vce.OrigClusterName = " "
+	vce.OrigDatacenterName = " "
+	vce.OrigLocation = " "
+	vce.OrigESXiHostName = " "
+	vce.OrigDatastoreName = " "
+	vce.DestClusterName = " "
+	vce.DestDatacenterName = " "
+	vce.DestLocation = " "
+	vce.DestESXiHostName = " "
+	vce.DestDatastoreName = " "
+
 	parse := reflect.ValueOf(vce).MethodByName("Parse" + vce.Subject)
 	if !parse.IsValid() {
 		err := fmt.Errorf("%w", ErrorEventNotImpemented)
@@ -148,14 +162,13 @@ func (p *VCenterProcessor) HandleEvent(e *common.Event) error {
 	}
 
 	err = vce.parse(jsonString)
-	b, err := json.Marshal(vce)
 	if err != nil {
 		p.logger.Debug(err)
 		return err
 	}
 
 	curevent := &common.Event{
-		Data:    string(b),
+		Data:    vce,
 		Channel: e.Channel,
 		Type:    "vcenterEvent",
 	}

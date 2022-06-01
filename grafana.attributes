@@ -2,7 +2,11 @@
   {{printf "{\"%s\":\"\",\"%s\":\"\"}" .type .channel}}
 {{- end}}
 {{- define "vcenter"}}
-  {{printf "{\"%s\":\"\",\"%s\":\"\",\"%s\":\"\",\"%s\":\"\"}" .type .channel .data.subject .data.data.ComputeResource.Name }}
+  {{printf "{\"%s\":\"\"," .type}}
+  {{printf "\"%s\":\"\"," .channel}}
+  {{printf "\"%s\":\"\"," .data.Subject }}
+  {{printf "\"%s\":\"\"" .data.DestLocation}}
+  {{printf "}"}}
 {{- end}}
 {{- define "grafana-attributes"}}
   {{- if .data}}
