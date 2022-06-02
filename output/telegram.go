@@ -84,7 +84,7 @@ func (t *TelegramOutput) sendMessage(spanCtx sreCommon.TracerSpanContext, IDToke
 
 	if err != nil {
 		t.logger.SpanError(span, err)
-		t.logger.SpanError(span, message)
+		t.logger.SpanDebug(span, message)
 		return nil, err
 	}
 
